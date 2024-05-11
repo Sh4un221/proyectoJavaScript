@@ -2,4 +2,6 @@
     --color-primary: #121212;
     --color-secundary: #242424;
     --color-ternary: #ffffff;
+    --color-cuaternary: #000000;
+    --fallback-fonts: Helvetica Neue,helvetica,arial,Hiragino Kaku Gothic Pro,Meiryo,MS Gothic;
 }

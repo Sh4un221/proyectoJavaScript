@@ -4,10 +4,11 @@
     padding: 0;
     box-sizing: border-box;
     color: var(--color-ternary);
+    font-family: CircularSpTitle,CircularSpTitle-Tall,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,var(--fallback-fonts,sans-serif);
 }
 
 body {
-    background: var(--color-primary);
+    background: var(--color-cuaternary);
 }
 
 .page {
@@ -23,10 +24,65 @@ body {
 .section__1 {
     grid-area: section__1; 
     display: flex;
-    flex-flow: row wrap; 
+    flex-flow: column; 
+    height: 98vh;
+    width: 99%;
+    background: var(--color-primary);
+    margin: 1vh;
+    border-radius: 5%;
+
+}
+.subtitle__section1{
+    font-size: 3em;
+    padding: 0.5em;
+    
+}
+.cardsbox{
+    background: var(--color-primary);
+    width: 98.5%;
+    height: 55%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5em;
+    margin: 0.5em;
+    overflow-y: scroll;
+    border-radius: 5%;
+}
+.card{
+width: 45%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background-color: var(--color-secundary);
+border-radius: 5%;
+padding: 1em;
+}
+.card img{
+    object-fit: cover;
+    width: 70%;
+    border-radius: 5%;
+
 }
 
 .audio__player {
     grid-area: section__2; 
     height: 100%;
+}
+.section__3{
+    grid-area: section__3; 
+    display: flex;
+    flex-flow: column; 
+    height: 98vh;
+    width: 95%;
+    background: var(--color-primary);
+    margin: 1vh;
+    border-radius: 5%;
+}
+.subtitle__section3{
+    font-size: 2.5em;
+    padding: 0.5em;
 }
