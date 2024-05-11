@@ -13,7 +13,7 @@ body {
 
 .page {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-columns: 28% 1fr 20%; 
     grid-template-areas:
     "section__1 section__2 section__3";
     width: 100%;
@@ -29,12 +29,13 @@ body {
     width: 99%;
     background: var(--color-primary);
     margin: 1vh;
-    border-radius: 5%;
+    border-radius: 2%;
 
 }
 .subtitle__section1{
     font-size: 3em;
     padding: 0.5em;
+    font-weight: bold;
     
 }
 .cardsbox{
@@ -80,9 +81,51 @@ padding: 1em;
     width: 95%;
     background: var(--color-primary);
     margin: 1vh;
-    border-radius: 5%;
+    border-radius: 2%;
 }
 .subtitle__section3{
     font-size: 2.5em;
     padding: 0.5em;
+    font-weight: bold;
+}
+.trackscontainer{
+    background: var(--color-primary);
+    width: 98.5%;
+    height: 55%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5em;
+    margin: 0.5em;
+    overflow-y: scroll;
+    border-radius: 5%;
+}
+.track__card{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background:var(--color-secundary);
+    gap: 0.4em;
+    padding: 0.5em;
+    border-radius: 1em;
+}
+.track__card img{
+    object-fit: contain;
+    width: 50%;
+    border-radius: 5%;
+}
+.info1{    
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+}
+.info2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 15%;
 }
