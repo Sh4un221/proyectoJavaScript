@@ -88,42 +88,48 @@ padding: 1em;
     padding: 0.5em;
     font-weight: bold;
 }
-.trackscontainer{
+.tracks__container {
     background: var(--color-primary);
     width: 98.5%;
-    height: 55%;
+    height: 98vh;
     display: flex;
-    flex-flow: column wrap;
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
     gap: 0.5em;
     padding: 0.5em;
     margin: 0.5em;
-    overflow-y: scroll;
+    overflow-y: auto;
     border-radius: 5%;
+    overflow-x: hidden; 
 }
-.track__card{
+
+.track__card {
     display: flex;
     flex-direction: row;
     width: 100%;
-    background:var(--color-secundary);
-    gap: 0.4em;
-    padding: 0.5em;
+    max-width: 400px; 
+    background: var(--color-secundary);
+
     border-radius: 1em;
+    margin-bottom: 0.5em;
 }
-.track__card img{
+
+.track__card img {
     object-fit: contain;
     width: 50%;
     border-radius: 5%;
 }
-.info1{    
+
+.info1 {
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
     width: 70%;
 }
-.info2{
+
+.info2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
