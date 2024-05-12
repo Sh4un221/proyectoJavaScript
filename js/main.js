@@ -46,7 +46,7 @@ function createAlbumCard(albumData) {
 }
 
 async function handleAlbumClick(albumId) {
-    const albumFrame = document.getElementById("albumFrame");
+    const albumFrame = document.querySelector("my-frame");
     albumFrame.setAttribute("uri", `spotify:album:${albumId}`);
 
     const albumData = await getAlbumById(albumId);
@@ -105,3 +105,36 @@ function msToMinutesSeconds(ms) {
     const seconds = ((ms % 60000) / 1000).toFixed(0);
     return `${minutes}:${(seconds < 10 ? "0" : "")}${seconds}`;
 }
+
+class Myframe extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({ mode: "open" });
+    }
+
+    connectedCallback() {
+        const uri = this.getAttribute("uri");
+        if (uri) {
+            this.render(uri);
+        }
+    }
+
+    render(uri) {
+        const id = uri.split(":").pop();
+        this.shadowRoot.innerHTML = `
+            <iframe class="spotify-iframe" width="100%" height="99%" src="https://open.spotify.com/embed/album/${id}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        `;
+    }
+
+    static get observedAttributes() {
+        return ["uri"];
+    }
+
+    attributeChangedCallback(name, oldVal, newVal) {
+        if (name === "uri") {
+            this.render(newVal);
+        }
+    }
+}
+
+customElements.define("my-frame", Myframe);
