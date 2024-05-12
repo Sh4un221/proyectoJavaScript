@@ -138,3 +138,31 @@ class Myframe extends HTMLElement {
 }
 
 customElements.define("my-frame", Myframe);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const btnAlbumView = document.querySelector(".album__view");
+    const btnTrackView = document.querySelector(".track__view");
+    const btnMediaView = document.querySelector(".media__view");
+
+    const sectionAlbums = document.querySelector(".section__1");
+    const sectionMedia = document.querySelector(".audio__player");
+    const sectionTrackList = document.querySelector(".section__3");
+
+    btnAlbumView.addEventListener("click", function() {
+        sectionAlbums.style.display = "flex";
+        sectionMedia.style.display = "none";
+        sectionTrackList.style.display = "none";
+    });
+
+    btnTrackView.addEventListener("click", function() {
+        sectionAlbums.style.display = "none";
+        sectionMedia.style.display = "none";
+        sectionTrackList.style.display = "flex";
+    });
+
+    btnMediaView.addEventListener("click", function() {
+        sectionAlbums.style.display = "none";
+        sectionMedia.style.display = "flex";
+        sectionTrackList.style.display = "none";
+    });
+});

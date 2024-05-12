@@ -132,9 +132,27 @@ padding: 1em;
     justify-content: center;
     width: 15%;
 }
+.buttons {
+    display: none;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 1em;
+}
+
+.buttons p {
+    cursor: pointer;
+    font-size: 2em;
+}
 @media screen and (max-width: 768px) {
     .page {
         grid-template-columns: 1fr; 
         grid-template-areas: "section__1" "section__2" "section__3";
+    }
+    *{
+        font-size: 10px;
+    }
+    .buttons{
+        display: flex;
+        align-items: end;
     }
 }
