@@ -2,67 +2,78 @@ import { getAlbumById } from './module/spotify.js';
 
 async function loadAlbums() {
     const albumSection = document.getElementById("albumSection");
-    const albumIds = ["7AJPV0L05IyIBid97AvwVD", "4Hjqdhj5rh816i1dfcUEaM", "4yP0hdKOZPNshxUOjY0cZj", "4G2rJNhsKOE6iHgtUqZ0Ye"];
+    const albumIds = ["7AJPV0L05IyIBid97AvwVD", "4Hjqdhj5rh816i1dfcUEaM", "4yP0hdKOZPNshxUOjY0cZj", "4G2rJNhsKOE6iHgtUqZ0Ye", "0Lg1uZvI312TPqxNWShFXL", "0JzdeLGqbDXPBlDbV4Y0c3", "2Auw0pTT6EcQdvHNimhLQI"];
 
-    for (const albumId of albumIds) {
-        const albumData = await getAlbumById(albumId);
-        if (albumData) {
-            const card = createAlbumCard(albumData);
-            albumSection.querySelector(".cardsbox").appendChild(card);
-        } else {
-            console.error(`No se pudo obtener el álbum con el ID: ${albumId}`);
-        }
+
+    const albumData = await getAlbumById(albumIds);
+    if (albumData) {
+        const card = createAlbumCard(albumData);
+        albumSection.querySelector(".cardsbox").appendChild(card);
+    } else {
+        console.error(`No se pudo obtener el álbum con el ID: ${albumId}`);
     }
+
 }
 
 loadAlbums();
 
 function createAlbumCard(albumData) {
-    let parseAge = albumData.release_date.split("-");
+    const fragment = document.createDocumentFragment()
+    albumData.forEach(album => {
 
-    const card = document.createElement("div");
-    card.classList.add("card");
+        let parseAge = album.release_date.split("-");
 
-    const img = document.createElement("img");
-    img.src = albumData.images[0].url;
-    img.alt = albumData.name;
-    card.appendChild(img);
+        const card = document.createElement("div");
+        card.classList.add("card");
 
-    const name = document.createElement("p");
-    name.classList.add("sname");
-    name.textContent = albumData.name;
-    card.appendChild(name);
+        const img = document.createElement("img");
+        img.src = album.images[0].url;
+        img.alt = album.name;
+        card.appendChild(img);
 
-    const artist = document.createElement("p");
-    artist.classList.add("autor__age");
-    artist.textContent = `${albumData.artists[0].name} ${parseAge[0]}`;
-    card.appendChild(artist);
+        const name = document.createElement("p");
+        name.classList.add("sname");
+        name.textContent = album.name;
+        card.appendChild(name);
 
-    card.dataset.albumId = albumData.id;
+        const artist = document.createElement("p");
+        artist.classList.add("autor__age");
+        artist.textContent = `${album.artists[0].name} ${parseAge[0]}`;
+        card.appendChild(artist);
 
-    card.addEventListener("click", () => handleAlbumClick(card.dataset.albumId));
+        card.dataset.albumId = album.id;
 
-    return card;
-}
+        card.addEventListener("click", () => handleAlbumClick(card.dataset.albumId));
+        fragment.appendChild(card);
 
-async function handleAlbumClick(albumId) {
-    const albumFrame = document.querySelector("my-frame");
-    albumFrame.setAttribute("uri", `spotify:album:${albumId}`);
+        async function handleAlbumClick(albumId) {
+            const albumFrame = document.querySelector("my-frame");
+            albumFrame.setAttribute("uri", `spotify:album:${albumId}`);
 
-    const albumData = await getAlbumById(albumId);
-    if (albumData && albumData.tracks && albumData.tracks.items.length > 0) {
-        const tracksContainer = document.querySelector(".tracks__container");
-        tracksContainer.innerHTML = "";
-        const albumImage = albumData.images[0].url;
-        const dataRelease = albumData.parseAge
-        for (const track of albumData.tracks.items) {
-            const trackCard = createTrackCard(track, albumImage, dataRelease);
-            tracksContainer.appendChild(trackCard);
+
+            if (albumData) {
+
+                const tracksContainer = document.querySelector(".tracks__container");
+                tracksContainer.innerHTML = "";
+                const albumImage = album.images[0].url;
+                const dataRelease = parseAge[0]
+                for (const track of album.tracks.items) {
+                    const trackCard = createTrackCard(track, albumImage, dataRelease);
+                    tracksContainer.appendChild(trackCard);
+                }
+            }
+            else {
+                console.error(`No se pudo obtener la lista de canciones del álbum ${album.name}`);
+            }
+
         }
-    } else {
-        console.error(`No se pudo obtener la lista de canciones del álbum con el ID: ${albumId}`);
-    }
+
+    });
+
+
+    return fragment;
 }
+
 
 function createTrackCard(track, albumImage, dataRelease) {
     const trackCard = document.createElement("div");
@@ -168,19 +179,40 @@ document.addEventListener("DOMContentLoaded", function () {
         sectionMedia.style.display = "flex";
         sectionTrackList.style.display = "none";
     });
+
+    
+
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+
+function detectView(){
+
     const btnAlbumView = document.querySelector(".album__view");
+    const btnTrackView = document.querySelector(".track__view");
+    const btnMediaView = document.querySelector(".media__view");
 
-    function isMobileView() {
-        return window.innerWidth <= 900;
-    }
+    const sectionAlbums = document.querySelector(".section__1");
+    const sectionMedia = document.querySelector(".section__2");
+    const sectionTrackList = document.querySelector(".section__3");
 
-    if (isMobileView()) {
-        btnAlbumView.click();
+    if(window.innerWidth <= 900){
+
+        console.log("Movile view");
+        sectionAlbums.style.display = "flex";
+        sectionMedia.style.display = "none";
+        sectionTrackList.style.display = "none";
+
     }
-});
+    else{
+        console.log("Desktop view");
+        sectionAlbums.style.display = "flex";
+        sectionMedia.style.display = "block";
+        sectionTrackList.style.display = "flex";
+    }
+}
+
+window.onresize = detectView;
+
 function searchInAlbums(searchTerm) {
     const cards = document.querySelectorAll('.cardsbox .card');
     cards.forEach(card => {
