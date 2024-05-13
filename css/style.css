@@ -16,9 +16,6 @@ body {
     grid-template-columns: 28% 1fr 20%; 
     grid-template-areas:
     "section__1 section__2 section__3";
-    width: 100%;
-    height: 100vh;
-    gap: 0.5em;
 }
 
 .section__1 {
@@ -124,12 +121,14 @@ padding: 1em;
     justify-content: center;
     align-items: center;
     width: 70%;
+    padding: 0.8em;
 }
 
 .info2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: start;
     width: 15%;
 }
 .buttons {
@@ -139,20 +138,70 @@ padding: 1em;
     margin-top: 1em;
 }
 
+
 .buttons p {
     cursor: pointer;
-    font-size: 2em;
+     transition: background-color 0.3s, color 0.3s;
+}
+.buttons p:hover {
+    background-color: #ccc; 
+    color: white; 
+}
+
+.buttons p:active {
+    background-color: #999; 
+}
+.autor__age3{
+    word-spacing: 2px;
+    font-size: 0.9em;
 }
 @media screen and (max-width: 768px) {
     .page {
-        grid-template-columns: 1fr; 
-        grid-template-areas: "section__1" "section__2" "section__3";
-    }
-    *{
-        font-size: 10px;
+        grid-template-columns:1fr;
+        grid-template-areas: 
+        "section__1" "section__2" "section__3";
+        margin: 0;
+        padding: 0;
     }
     .buttons{
         display: flex;
-        align-items: end;
+        align-items: center;
+        height: 5vh;
+    }
+    .buttons {
+        font-size: 20px;
+    }
+    .section__1{
+        margin: 0;
+        padding: 0;
+        width: auto;
+        height: auto;
+    }
+    .section__1 .subtitle__section1{
+        height: 32vh;
+    }
+    .section__1 .cardsbox{
+        height: 60vh;
+        width: 99%;
+        margin: 0;
+        padding: 1em;
+    }
+
+    .section__3{
+        width: auto;
+        height: auto;
+        padding: 0;
+        margin: 0;
+    }
+    .tracks__container{
+        width: 100%;
+        height: 75vh;
+    }
+    .subtitle__section3{
+        height: 17vh;
+    }
+    .audio__player{
+        width: 100%;
+        height: 92vh;
     }
 }

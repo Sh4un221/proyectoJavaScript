@@ -1,14 +1,14 @@
-import { getAlbumById } from './module/spotify.js'; 
+import { getAlbumById } from './module/spotify.js';
 
 async function loadAlbums() {
     const albumSection = document.getElementById("albumSection");
-    const albumIds = ["7AJPV0L05IyIBid97AvwVD", "4Hjqdhj5rh816i1dfcUEaM", "4yP0hdKOZPNshxUOjY0cZj", "4G2rJNhsKOE6iHgtUqZ0Ye"]; 
-    
+    const albumIds = ["7AJPV0L05IyIBid97AvwVD", "4Hjqdhj5rh816i1dfcUEaM", "4yP0hdKOZPNshxUOjY0cZj", "4G2rJNhsKOE6iHgtUqZ0Ye"];
+
     for (const albumId of albumIds) {
         const albumData = await getAlbumById(albumId);
         if (albumData) {
             const card = createAlbumCard(albumData);
-            albumSection.querySelector(".cardsbox").appendChild(card); 
+            albumSection.querySelector(".cardsbox").appendChild(card);
         } else {
             console.error(`No se pudo obtener el álbum con el ID: ${albumId}`);
         }
@@ -22,17 +22,17 @@ function createAlbumCard(albumData) {
 
     const card = document.createElement("div");
     card.classList.add("card");
-    
+
     const img = document.createElement("img");
     img.src = albumData.images[0].url;
     img.alt = albumData.name;
     card.appendChild(img);
-    
+
     const name = document.createElement("p");
     name.classList.add("sname");
     name.textContent = albumData.name;
     card.appendChild(name);
-    
+
     const artist = document.createElement("p");
     artist.classList.add("autor__age");
     artist.textContent = `${albumData.artists[0].name} ${parseAge[0]}`;
@@ -41,7 +41,7 @@ function createAlbumCard(albumData) {
     card.dataset.albumId = albumData.id;
 
     card.addEventListener("click", () => handleAlbumClick(card.dataset.albumId));
-    
+
     return card;
 }
 
@@ -52,11 +52,11 @@ async function handleAlbumClick(albumId) {
     const albumData = await getAlbumById(albumId);
     if (albumData && albumData.tracks && albumData.tracks.items.length > 0) {
         const tracksContainer = document.querySelector(".tracks__container");
-        tracksContainer.innerHTML = ""; 
-        const albumImage = albumData.images[0].url; 
-        const dataRelease=albumData.parseAge
-        for (const track of albumData.tracks.items) { 
-            const trackCard = createTrackCard(track, albumImage,dataRelease); 
+        tracksContainer.innerHTML = "";
+        const albumImage = albumData.images[0].url;
+        const dataRelease = albumData.parseAge
+        for (const track of albumData.tracks.items) {
+            const trackCard = createTrackCard(track, albumImage, dataRelease);
             tracksContainer.appendChild(trackCard);
         }
     } else {
@@ -64,12 +64,12 @@ async function handleAlbumClick(albumId) {
     }
 }
 
-function createTrackCard(track, albumImage,dataRelease) {
+function createTrackCard(track, albumImage, dataRelease) {
     const trackCard = document.createElement("div");
     trackCard.classList.add("track__card");
 
     const img = document.createElement("img");
-    img.src = albumImage; 
+    img.src = albumImage;
     img.alt = track.name;
     trackCard.appendChild(img);
 
@@ -105,7 +105,10 @@ function msToMinutesSeconds(ms) {
     const seconds = ((ms % 60000) / 1000).toFixed(0);
     return `${minutes}:${(seconds < 10 ? "0" : "")}${seconds}`;
 }
-
+document.addEventListener("DOMContentLoaded", function () {
+    const btnAlbumView = document.querySelector(".album__view");
+    btnAlbumView.click();
+});
 class Myframe extends HTMLElement {
     constructor() {
         super();
@@ -139,30 +142,42 @@ class Myframe extends HTMLElement {
 
 customElements.define("my-frame", Myframe);
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const btnAlbumView = document.querySelector(".album__view");
     const btnTrackView = document.querySelector(".track__view");
     const btnMediaView = document.querySelector(".media__view");
 
     const sectionAlbums = document.querySelector(".section__1");
-    const sectionMedia = document.querySelector(".audio__player");
+    const sectionMedia = document.querySelector(".section__2");
     const sectionTrackList = document.querySelector(".section__3");
 
-    btnAlbumView.addEventListener("click", function() {
+    btnAlbumView.addEventListener("click", function () {
         sectionAlbums.style.display = "flex";
         sectionMedia.style.display = "none";
         sectionTrackList.style.display = "none";
     });
 
-    btnTrackView.addEventListener("click", function() {
+    btnTrackView.addEventListener("click", function () {
         sectionAlbums.style.display = "none";
         sectionMedia.style.display = "none";
         sectionTrackList.style.display = "flex";
     });
 
-    btnMediaView.addEventListener("click", function() {
+    btnMediaView.addEventListener("click", function () {
         sectionAlbums.style.display = "none";
         sectionMedia.style.display = "flex";
         sectionTrackList.style.display = "none";
     });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const btnAlbumView = document.querySelector(".album__view");
+
+    function isMobileView() {
+        return window.innerWidth <= 900;
+    }
+
+    if (isMobileView()) {
+        btnAlbumView.click();
+    }
 });
