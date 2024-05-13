@@ -35,18 +35,18 @@ body {
     font-weight: bold;
     
 }
-.cardsbox{
+.cardsbox {
     background: var(--color-primary);
     width: 98.5%;
-    height: 55%;
+    height: 45vh; 
     display: flex;
-    flex-flow: column wrap;
+    flex-wrap: wrap; 
     justify-content: center;
     align-items: center;
     gap: 0.5em;
     padding: 0.5em;
     margin: 0.5em;
-    overflow-y: scroll;
+    overflow-y: scroll; 
     border-radius: 5%;
 }
 .card{
@@ -155,6 +155,69 @@ padding: 1em;
     word-spacing: 2px;
     font-size: 0.9em;
 }
+
+.search-header {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .search-header__input {
+    font-family: inherit;
+    font-size: 16px;
+    background-color: #0a0a0a;
+    border: solid 0.5px #525252;
+    color: #646464;
+    padding: 0.7rem 1rem;
+    border-radius: 25px;
+    width: 98%;
+    height: auto;
+    transition: all ease-in-out 0.5s;
+    margin-right: -2rem;
+    opacity: 1;
+    text-align: center;
+  }
+  
+  .search-header__input:hover,
+  .search-header__input:focus {
+    box-shadow: 0 0 1em #00000013;
+  }
+  
+  .search-header__input:focus {
+    outline: none;
+    background-color: #0a0a0aad;
+  }
+  
+  .search-header__input::-webkit-input-placeholder {
+    font-weight: 100;
+    color: #3a3a3a;
+  }
+  
+  .search-header__input:focus + .search-header__button {
+    background-color: transparent;
+  }
+  
+  .search-header__button {
+    border: none;
+    background-color: transparent;
+    margin-top: 0.1em;
+  }
+  
+  .search-header__button:hover {
+    cursor: pointer;
+  }
+  
+  .search-header__icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: #3a3a3a;
+  }
+  .card[style="display: none;"],
+.track__card[style="display: none;"] {
+    display: none !important;
+}
+
+  
 @media screen and (max-width: 768px) {
     .page {
         grid-template-columns:1fr;
@@ -178,15 +241,17 @@ padding: 1em;
         height: auto;
     }
     .section__1 .subtitle__section1{
-        height: 32vh;
+        height: 20vh;
     }
     .section__1 .cardsbox{
-        height: 60vh;
+        height: 66vh;
         width: 99%;
         margin: 0;
         padding: 1em;
     }
-
+    .search-header__input {
+        height: 5vh;
+    }
     .section__3{
         width: auto;
         height: auto;
@@ -198,10 +263,11 @@ padding: 1em;
         height: 75vh;
     }
     .subtitle__section3{
-        height: 17vh;
+        height: 11vh;
     }
     .audio__player{
         width: 100%;
         height: 92vh;
     }
+
 }

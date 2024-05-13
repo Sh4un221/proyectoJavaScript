@@ -181,3 +181,34 @@ document.addEventListener("DOMContentLoaded", function () {
         btnAlbumView.click();
     }
 });
+function searchInAlbums(searchTerm) {
+    const cards = document.querySelectorAll('.cardsbox .card');
+    cards.forEach(card => {
+        const name = card.querySelector('.sname').textContent.toLowerCase();
+        if (name.includes(searchTerm.toLowerCase())) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function searchInTracks(searchTerm) {
+    const tracks = document.querySelectorAll('.tracks__container .track__card');
+    tracks.forEach(track => {
+        const name = track.querySelector('.aname3').textContent.toLowerCase();
+        if (name.includes(searchTerm.toLowerCase())) {
+            track.style.display = 'flex';
+        } else {
+            track.style.display = 'none';
+        }
+    });
+}
+
+document.querySelector('.section__1 .search-header__input').addEventListener('input', function (event) {
+    searchInAlbums(event.target.value);
+});
+
+document.querySelector('.section__3 .search-header__input').addEventListener('input', function (event) {
+    searchInTracks(event.target.value);
+});

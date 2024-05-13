@@ -4,7 +4,7 @@ export const getAlbumById = async (id) => {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '7736c806f9msh3281aecc3685b0cp13ef77jsnaffa073fbabb',
+            'X-RapidAPI-Key': 'b53fe08de5msh5e06288c92eff31p17c73ajsnfcc575b6d29',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
