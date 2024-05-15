@@ -25,11 +25,11 @@ async function putTrackRecommendation() {
         let parseAge = track.album.release_date.split("-");
         const albumImage = track.album.images[0].url;
         const dataRelease = parseAge[0]
-        for (const track of trackData) {
-            const trackCard = createTrackCard(track, albumImage, dataRelease);
-            tracksRecomendationContainer.appendChild(trackCard);
-        }
+        const trackCard = createTrackCard(track, albumImage, dataRelease);
+        tracksRecomendationContainer.appendChild(trackCard);
     });
+
+   
 
 }
 await putTrackRecommendation()
