@@ -1,4 +1,7 @@
-import { getAlbumById } from './module/spotify.js';
+import {
+    getAlbumById,
+    getTrackRecommendations
+} from './module/spotify.js';
 
 async function loadAlbums() {
     const albumSection = document.getElementById("albumSection");
@@ -10,11 +13,26 @@ async function loadAlbums() {
         const card = createAlbumCard(albumData);
         albumSection.querySelector(".cardsbox").appendChild(card);
     } else {
-        console.error(`No se pudo obtener el álbum con el ID: ${albumId}`);
+        console.error(`No se pudo obtener el álbum con el ID: ${albumIds}`);
     }
 
 }
+async function putTrackRecommendation() {
+    let trackData = await getTrackRecommendations()
+    const tracksRecomendationContainer = document.querySelector(".track_recommendations_box");
+    tracksRecomendationContainer.innerHTML = "";
+    trackData.forEach(track => {
+        let parseAge = track.album.release_date.split("-");
+        const albumImage = track.album.images[0].url;
+        const dataRelease = parseAge[0]
+        for (const track of trackData) {
+            const trackCard = createTrackCard(track, albumImage, dataRelease);
+            tracksRecomendationContainer.appendChild(trackCard);
+        }
+    });
 
+}
+await putTrackRecommendation()
 loadAlbums();
 
 function createAlbumCard(albumData) {
@@ -120,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnAlbumView = document.querySelector(".album__view");
     btnAlbumView.click();
 });
+
 class Myframe extends HTMLElement {
     constructor() {
         super();
@@ -180,12 +199,12 @@ document.addEventListener("DOMContentLoaded", function () {
         sectionTrackList.style.display = "none";
     });
 
-    
+
 
 });
 
 
-function detectView(){
+function detectView() {
 
     const btnAlbumView = document.querySelector(".album__view");
     const btnTrackView = document.querySelector(".track__view");
@@ -195,7 +214,7 @@ function detectView(){
     const sectionMedia = document.querySelector(".section__2");
     const sectionTrackList = document.querySelector(".section__3");
 
-    if(window.innerWidth <= 900){
+    if (window.innerWidth <= 900) {
 
         console.log("Movile view");
         sectionAlbums.style.display = "flex";
@@ -203,7 +222,7 @@ function detectView(){
         sectionTrackList.style.display = "none";
 
     }
-    else{
+    else {
         console.log("Desktop view");
         sectionAlbums.style.display = "flex";
         sectionMedia.style.display = "block";

@@ -3,7 +3,7 @@ export const getAlbumById = async (id) => {
     const url = `https://spotify23.p.rapidapi.com/albums/?ids=${id}`;
     const options = {
         method: 'GET',
-        params:{
+        params: {
             ids: `${id}`
         },
         headers: {
@@ -17,6 +17,25 @@ export const getAlbumById = async (id) => {
         return data.albums
     } catch (error) {
         console.error('Error al obtener el álbum:', error);
-        return null; 
+        return null;
     }
 };
+export const getTrackRecommendations = async () => {
+    const url = 'https://spotify23.p.rapidapi.com/recommendations/?limit=20&seed_tracks=0c6xIDDpzE81m2q797ordA&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry';
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': 'b53fe08de5msh5e06288c92eff31p17c73ajsnfcc575b6d297',
+            'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
+        }
+    };
+
+    try {
+        const res = await fetch(url, options);
+        const data = await res.json();
+        return data.tracks
+    } catch (error) {
+        console.error(error);
+        return null
+    }
+}

@@ -49,6 +49,27 @@ body {
     overflow-y: scroll; 
     border-radius: 5%;
 }
+.track_recommendations_box {
+    background: var(--color-primary);
+    width: 98.5%;
+    height: 30vh;
+    max-height: 100%; 
+    overflow-y: auto; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    padding: 0.5em;
+    gap: 0.2em;
+    
+}
+.recommendations{
+    font-size: 1.4em;
+    padding: 0.2em;
+    font-weight: bold;
+    margin-left: 1em;
+    
+}
 .card{
 width: 45%;
 display: flex;
@@ -115,11 +136,12 @@ transition: background-color 0.3s ease;
     display: flex;
     flex-direction: row;
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     height: 100px;
     background: var(--color-secundary);
     border-radius: 1em;
     margin-bottom: 0.5em; 
+    overflow-x: hidden;
 }
 
 .track__card img {
