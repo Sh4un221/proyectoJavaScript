@@ -4,6 +4,8 @@
 // } from './services/spotify.js';
 
 import { Myframe , detectView, loadAlbums, putTrackRecommendation} from "./helper.js";
+import { searchInAlbums } from "./modules/albumsLogic.js";
+import { searchInTracks } from "./modules/trackLogic.js";
 
 loadAlbums();
 
