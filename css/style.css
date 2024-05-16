@@ -266,6 +266,7 @@ transition: background-color 0.3s ease;
 
   
 @media screen and (max-width: 768px) {
+
     .page {
         grid-template-columns:1fr;
         grid-template-areas: 
@@ -291,10 +292,14 @@ transition: background-color 0.3s ease;
         height: 20vh;
     }
     .section__1 .cardsbox{
-        height: 66vh;
+        height: 50vh;
         width: 99%;
         margin: 0;
         padding: 1em;
+    }
+    .track_recommendations_box{
+        height: 13vh;
+        font-size: 14px;
     }
     .search-header__input {
         height: 5vh;
