@@ -7,7 +7,7 @@ export const getAlbumById = async (id) => {
             ids: `${id}`
         },
         headers: {
-            'X-RapidAPI-Key': 'b53fe08de5msh5e06288c92eff31p17c73ajsnfcc575b6d297',
+            'X-RapidAPI-Key': '2bae3b21c1msh20c5157d8b0370ap18f26fjsn7807f8a7965f',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
@@ -25,7 +25,7 @@ export const getTrackRecommendations = async () => {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'b53fe08de5msh5e06288c92eff31p17c73ajsnfcc575b6d297',
+            'X-RapidAPI-Key': '2bae3b21c1msh20c5157d8b0370ap18f26fjsn7807f8a7965f',
             'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
     };
